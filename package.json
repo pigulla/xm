@@ -10,8 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "binary-file": "^0.2.1",
+    "chalk": "^2.3.0",
     "json-strictify": "^2.0.3",
+    "log-update": "^2.3.0",
+    "moment": "^2.19.2",
     "mz": "^2.7.0",
+    "nanotimer": "^0.3.15",
     "string.prototype.padstart": "^3.0.0",
     "string.prototype.trim": "^1.1.2"
   }
