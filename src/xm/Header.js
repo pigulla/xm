@@ -20,8 +20,6 @@ class Header {
         this.default_tempo = buffer.readUInt16LE(60 + 16);
         this.default_bpm = buffer.readUInt16LE(60 + 18);
         this.pattern_order_table = [...pattern_order_table.slice(0, this.song_length)];
-
-        console.dir(this.pattern_order_table.map(n => n.toString(16)));
     }
 
     uses_amiga_frequency_table() {
