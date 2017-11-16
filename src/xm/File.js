@@ -2,6 +2,8 @@ const Header = require('./Header');
 const Instrument = require('./Instrument');
 const Pattern = require('./Pattern');
 
+// ftp://ftp.modland.com/pub/documents/format_documentation/FastTracker%202%20v2.04%20%28.xm%29.html
+
 class Xm {
     constructor(buffer) {
         this.header = new Header(buffer);
@@ -10,29 +12,19 @@ class Xm {
 
         let position = 60 + 20 + 256;
         for (let i = 0; i < this.header.num_patterns; i++) {
-            //console.log(`Loading pattern ${i} from offset ${position}`);
+            const data = buffer.slice(position);
+            const pattern = new Pattern(data);
 
-            const pattern = Pattern.from(buffer, position);
             this.patterns.push(pattern);
             position += pattern.size;
         }
 
         for (let i = 0; i < this.header.num_instruments; i++) {
-//            console.log(`Loading instrument ${i} from offset ${position}`);
-
-            const instrument = Instrument.from(buffer, position);
+            const data = buffer.slice(position);
+            const instrument = new Instrument(data);
             this.instruments.push(instrument);
-//            console.log(`  Instrument size is ${instrument.size}`);
             position += instrument.size;
         }
-    }
-
-    toJSON() {
-        return {
-//            header: this.header.toJSON(),
-//            patterns: this.patterns.map(pattern => pattern.toJSON()),
-            instruments: this.instruments.map(instrument => instrument.toJSON())
-        };
     }
 }
 
